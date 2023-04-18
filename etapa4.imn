@@ -2,7 +2,7 @@ node n1 {
     type router
     model host
     network-config {
-	hostname servidor
+	hostname Servidor
 	!
 	interface eth0
 	 ip address 192.0.2.10/24
@@ -17,10 +17,11 @@ node n1 {
 	custom-config-id service:UserDefined
 	custom-command UserDefined
 	config {
-	cmdup=('python O_Servidor.py', )
+	cmdup=('python -m SimpleHTTPServer 80', )
 	meta=Servidor .
 	}
     }
+    services {DefaultRoute SSH UserDefined}
 }
 
 node n2 {
@@ -55,58 +56,44 @@ node n3 {
     iconcoords {377.0 224.0}
     labelcoords {377.0 248.0}
     interface-peer {e0 n2}
-    interface-peer {e1 n4}
-    interface-peer {e2 n5}
+    interface-peer {e3 n7}
+    interface-peer {e4 n6}
 }
 
-node n4 {
+node n6 {
     type router
     model PC
     network-config {
-	hostname Andre
+	hostname Cliente
 	!
 	interface eth0
-	 ip address 192.0.3.20/24
-	 ipv6 address 2001:db8:1::20/64
+	 ip address 192.0.3.23/24
+	 ipv6 address 2001:db8:1::23/64
 	!
     }
     canvas c1
-    iconcoords {450.0 126.0}
-    labelcoords {450.0 158.0}
+    iconcoords {552.0 232.0}
+    labelcoords {552.0 264.0}
+    services {DefaultRoute}
     interface-peer {eth0 n3}
-    custom-config {
-	custom-config-id service:UserDefined
-	custom-command UserDefined
-	config {
-	meta=Cliente .
-	}
-    }
-    services {DefaultRoute UserDefined}
 }
 
-node n5 {
+node n7 {
     type router
     model PC
     network-config {
-	hostname Lima
+	hostname Fornecedor
 	!
 	interface eth0
-	 ip address 192.0.3.21/24
-	 ipv6 address 2001:db8:1::21/64
+	 ip address 192.0.3.22/24
+	 ipv6 address 2001:db8:1::22/64
 	!
     }
     canvas c1
-    iconcoords {541.0 225.0}
-    labelcoords {541.0 257.0}
+    iconcoords {463.0 118.0}
+    labelcoords {463.0 150.0}
+    services {DefaultRoute}
     interface-peer {eth0 n3}
-    custom-config {
-	custom-config-id service:UserDefined
-	custom-command UserDefined
-	config {
-	meta=Cliente .
-	}
-    }
-    services {DefaultRoute UserDefined}
 }
 
 link l1 {
@@ -119,13 +106,13 @@ link l2 {
     bandwidth 0
 }
 
-link l3 {
-    nodes {n3 n4}
+link l5 {
+    nodes {n3 n7}
     bandwidth 0
 }
 
-link l4 {
-    nodes {n3 n5}
+link l6 {
+    nodes {n3 n6}
     bandwidth 0
 }
 
@@ -150,7 +137,7 @@ annotation a2 {
     labelcolor black
     fontfamily {Arial}
     fontsize 12
-    color #4ea36b
+    color #4ee36b
     width 0
     border #00fe00
     rad 25
