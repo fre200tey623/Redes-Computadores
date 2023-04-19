@@ -17,8 +17,27 @@ node n1 {
 	custom-config-id service:UserDefined
 	custom-command UserDefined
 	config {
+	files=('index.html', )
 	cmdup=('python -m SimpleHTTPServer 80', )
 	meta=Servidor .
+	}
+    }
+	custom-config {
+	custom-config-id service:UserDefined:index.html
+	custom-command index.html
+	config {
+	<!DOCTYPE html>
+	<html lang="pt-br">
+	<head>
+	    <meta charset="UTF-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <title>Projeto minha empresa</title>
+	</head>
+	<body>
+	    <p>Minha empresa não mantém um estoque próprio de produtos, mas em vez disso, trabalha com fornecedores terceirizados que enviam diretamente os produtos aos clientes em nome da empresa. Isso permite que a empresa possa focar em outras áreas do negócio, como marketing e atendimento ao cliente, sem se preocupar com a gestão de estoques e logística.</p>
+	</body>
+	</html>
 	}
     }
     services {DefaultRoute SSH UserDefined}
